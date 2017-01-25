@@ -20,7 +20,7 @@ fi
 mkdir $TMP_DIR
 cd $TMP_DIR
 wget -qO- $ARCHIVE_URL |tar zx
-cd ubuntu-env-master-*
+cd ubuntu-env-master
 
 # install user configs
 if [ "$EUID" -ne 0 ]; then  # skip if running as root, we install root stuff later
