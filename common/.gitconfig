@@ -1,0 +1,11 @@
+[alias]
+	lg-asci = log --graph --pretty=format:'%h -%d %s (%cr) <%an>' --abbrev-commit
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+[color]
+	ui = true
+[push]
+	default = simple
+[help]
+	autocorrect = -1
+[core]
+	editor = slap

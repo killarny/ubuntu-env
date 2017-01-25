@@ -1,0 +1,22 @@
+# use less as the pager
+--pager=less -r
+
+# ignore case in search strings if PATTERN has no uppercase characters
+--smart-case
+
+# sort found files lexically
+--sort-files
+
+# add a type for less files
+--type-set=less=.less
+
+# ignore .idea directory
+#-G^(?!.idea).*$
+--ignore-dir=.idea
+
+--type-set
+sls=.sls
+
+--type-set
+salt=.sls
+

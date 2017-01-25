@@ -1,0 +1,6 @@
+if [ ! -f $HOME/.django/django_bash_completion ];
+then
+    mkdir -p $HOME/.django
+    wget https://raw.github.com/django/django/master/extras/django_bash_completion -O $HOME/.django/django_bash_completion
+fi
+. $HOME/.django/django_bash_completion

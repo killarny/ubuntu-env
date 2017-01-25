@@ -1,0 +1,2 @@
+# check everywhere in $HOME for uncommitted changes tracked by any git repos
+alias git-check='find $HOME -path $WORKON_HOME -prune -o -type d -name ".git" -print | while read dir; do cd $dir/../; if [ -n "$(git status --porcelain)" ]; then echo -e "\n\e[34m${dir//\.git/}" | sed s!$HOME!~!; git status -s; fi done'

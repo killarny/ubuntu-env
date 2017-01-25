@@ -1,0 +1,80 @@
+alias simple-http-server='sudo python -m SimpleHTTPServer 80'
+
+function simple-https-server () {
+    sudo /usr/bin/python2 - $@ <<END
+import BaseHTTPServer, SimpleHTTPServer
+from os.path import exists
+import ssl
+from sys import argv, exit
+from tempfile import mkstemp
+
+try:
+    certfile = argv[1]
+    if not exists(certfile):
+        print('Certificate: file {} does not exist!'.format(certfile))
+        exit(1)
+    print('Certificate: using {}'.format(certfile))
+except IndexError:
+    certfile = mkstemp()[-1]
+    with open(certfile, 'w') as cfile:
+        cfile.write("""-----BEGIN PRIVATE KEY-----
+MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC/1rIM2myj1OqU
+hNOhdWmjCpSxYmLFLWVxuiKZbHIIM9EJksOzQ7eCJ1FlCFlomhToq/bq0UeBiocY
+/pcw+qQFKP5pkzEUJZ1GSvGDfQaL+dzI7cs6CNo03rS6EXZjH0dwCfrxMPyIrv8v
+SbLvjRMECtLFqtPtabf2LvnYN5Sba3iDBe3qzoSqZi1BBswK4E2CfzJAkDOme0Wz
+JFhyxQlurbWm9S5FNsymXHXkYgc5m/Z9w0CdJ9nLob45TVyFHfqn77utVgKRCrO1
+JMQn8ohcxa446PZCwTjOolfNzjQq/SPMjq+qV2LWLtbCm1lPIGrJEgZY1FcDpla6
+lEhNHbVNAgMBAAECggEAPtx4PZP5U3n6YC5iNp8FvYJDFRkbKmdkvW5z1fheKWfp
+UIzCCeTfpguCNWwV+Bu9TDzFTU7EcqNU/5C1NDx9MJ+tNiUgSOzGa3k1SJPYaFe4
+zDJ3jI3ICtkLOYltVK+0NfdfPleB+Lv3LKSmuK5uk72EMXd3uG0S9d2QyxPzYzWz
+wbTJ7RnzIBV8vbblvN2Rc5tGVtxfWe5CYUPkFvR6+mjC8MaAet373f1hPOIttpRf
+dLevCOz7Zl6bW2Onm0X2Mf/k9FLWbZZDLGdlIMAORhpJsBPlBycXTn81hEH4JsQ4
+T11vMhAOOYPi4dRnXvr/NiZVR61jRAidHXacq5A0FQKBgQDof0yfwDrA/B1tYK1n
+BrGA606KI/Lto1J62IgmrU+3kZhSy2ECYRU9k0MpvwoutIkEFQ4clVC/xMokqfuw
+NYKhPcYAbYyxPC/gfpJH3w12+0zsz9+28IyXGfzabOKbVu0YJo76D1Gj99KxA4wU
+eZj7GggtEIg4Jo9uQUdf6Vx1rwKBgQDTOzV3GpGp4jpW3QD13oh837UxdklM8lf7
+uR8LlCu1m0ibGAYq2YEMR4wtBHXkHyZahkgRajkD+xysJPwqO0yC3SmKj9ZZop47
++jvsBFwV00kAzQuF4Ucv2sl3eOMm86YCPGUsQnix3jo9ZpFe2ksB2vXUG9APor0I
+/jJ6SWY/wwKBgQDd49hqQpkQY81l/TWhNSclRe3gMyz/Fbd7HLrcRt3k8WRx6D5+
+ec8+xBP+fKAoMQ7vQXUFXJADZboSwdQ+uOMiJgWZlPQIlsuOst3DECMWogIppL77
+JprW/utuPysKXCzNtscP6pzdI4EGhb8kL2UMiSyybavEAzEyZcTLybj/awKBgFf6
+MSqKRmEbeHD1W5EMPozEIBOZ0K3bwgl18RhBfnMFWhg+yVLPhJA4vImDchaxYqgR
+hbK7K0QdMrQAM4bja9qVgtfTUNPEh2MztgF3T2NHvQA4ZrQ8QAoOdhrsnq96i4oi
+3YCxrtNmW5t3PNTk1pjPOdQ+QUpB3boBJcUJDS1BAoGBAIYeaRbRsGLbnFQUghcB
+ypWCGQL56KEYaMKGfu3k7T3tKKysM2hkVOXIFamJpk+AWUa6vn1cK2wegvUBkoG/
+almVYg03gy5nnjV/gfcKHE5QoJPXsFcsGTC1oOsaRWkOpcJoyEx6Tlps9NWz7S3W
+jNzt/HCvyGx6i7AFHAxduDXd
+-----END PRIVATE KEY-----
+-----BEGIN CERTIFICATE-----
+MIIDTTCCAjWgAwIBAgIJAOcmQVm/U9ENMA0GCSqGSIb3DQEBBQUAMD0xCzAJBgNV
+BAYTAnVzMQswCQYDVQQIDAJ1dDEhMB8GA1UECgwYSW50ZXJuZXQgV2lkZ2l0cyBQ
+dHkgTHRkMB4XDTEzMDgwMjAwMDg1N1oXDTE0MDgwMjAwMDg1N1owPTELMAkGA1UE
+BhMCdXMxCzAJBgNVBAgMAnV0MSEwHwYDVQQKDBhJbnRlcm5ldCBXaWRnaXRzIFB0
+eSBMdGQwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC/1rIM2myj1OqU
+hNOhdWmjCpSxYmLFLWVxuiKZbHIIM9EJksOzQ7eCJ1FlCFlomhToq/bq0UeBiocY
+/pcw+qQFKP5pkzEUJZ1GSvGDfQaL+dzI7cs6CNo03rS6EXZjH0dwCfrxMPyIrv8v
+SbLvjRMECtLFqtPtabf2LvnYN5Sba3iDBe3qzoSqZi1BBswK4E2CfzJAkDOme0Wz
+JFhyxQlurbWm9S5FNsymXHXkYgc5m/Z9w0CdJ9nLob45TVyFHfqn77utVgKRCrO1
+JMQn8ohcxa446PZCwTjOolfNzjQq/SPMjq+qV2LWLtbCm1lPIGrJEgZY1FcDpla6
+lEhNHbVNAgMBAAGjUDBOMB0GA1UdDgQWBBTawMbViHX5w2/hy/Ukkhc5Mfa0DjAf
+BgNVHSMEGDAWgBTawMbViHX5w2/hy/Ukkhc5Mfa0DjAMBgNVHRMEBTADAQH/MA0G
+CSqGSIb3DQEBBQUAA4IBAQAvS9kgR3LeoGJO95B5eDGJ0eYicBH1++hOto5BLmjO
+jVckqXBoew8eKrN4TrnoEhZJeVAOYmml/UWuZhjUQuwsF+WIT/XX9Bi5yVHThydT
+SGtL3tophpnWB3/zfel0c1VvT1B/0eRImLcRLeH0R55qOmBjF3NGcKCaZG6CSQjh
+y6w4LUEtWTSzgXUSejZawf+YuPMDY9/9Oxegbv0mN506Mu/buGaYO5iapA1QCB/V
+o1wKP5GVks/4Cm29owUwV0F7HPwUpXIvTfTpTqoTNdQlaWgJ2qrry5WcrFGpZ8Ix
+o36hqgaz+XLRKx5yWtngd60QiWxIMAWzpTxlbQafwdo+
+-----END CERTIFICATE-----""")
+        cfile.flush()
+    print('Certificate: none given, generating one at {}'.format(certfile))
+host, port = '', 443
+try:
+    httpd = BaseHTTPServer.HTTPServer((host, port), SimpleHTTPServer.SimpleHTTPRequestHandler)
+    httpd.socket = ssl.wrap_socket (httpd.socket, certfile=certfile, server_side=True)
+    print('Serving HTTPS on {host} port {port} ...'.format(host=host or '0.0.0.0', port=port))
+    httpd.serve_forever()
+except Exception as e:
+    print(str(e))
+    exit(1)
+END
+}
