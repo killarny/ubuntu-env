@@ -28,6 +28,6 @@ bind ^H replace all     # replace
 bind ^I casesens search
 bind ^I casesens replace
 
-## git commit files
-include "~/.nano/git.nanorc"
+## include syntax highlighting files
+include "~/.nano/*.nanorc"
 

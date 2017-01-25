@@ -22,6 +22,20 @@ cd $TMP_DIR
 wget -qO- $ARCHIVE_URL |tar zx
 cd ubuntu-env-master
 
+# include Anthony Scopatz's excellent collection of nano highlight files
+#  (sourced from: https://github.com/scopatz/nanorc)
+if [ ! -d common/.nano/ ]
+then
+    mkdir common/.nano/
+fi
+cd common/.nano/
+wget -qO- https://github.com/scopatz/nanorc/archive/master.tar.gz |tar zx
+# remove files that aren't related to nanorc
+find nanorc-master/ -not -path "nanorc-master/" |grep -ve ".nanorc$" |xargs rm
+mv nanorc-master/* ./
+rm -rf nanorc-master
+cd -
+
 # install user configs
 if [ "$EUID" -ne 0 ]; then  # skip if running as root, we install root stuff later
     echo Installing user configs.
