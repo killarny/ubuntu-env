@@ -8,4 +8,4 @@
 [help]
 	autocorrect = -1
 [core]
-	editor = slap
+	editor = micro
