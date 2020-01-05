@@ -17,6 +17,13 @@ if ! hash $DEPS 2>/dev/null; then
     sudo apt-get install -qqy $DEPS
 fi
 
+# check for micro editor
+if ! snap list micro; then
+	echo
+	echo Installing micro editor..
+	sudo snap install micro --classic
+fi
+
 mkdir $TMP_DIR
 cd $TMP_DIR
 wget -qO- $ARCHIVE_URL |tar zx
