@@ -1,6 +1,6 @@
 #! /bin/bash
 
-ARCHIVE_URL="https://github.com/killarny/ubuntu-env/archive/master.tar.gz"
+ARCHIVE_URL="https://github.com/killarny/ubuntu-env/archive/main.tar.gz"
 TMP_DIR="/tmp/killarny-ubuntu-env-bootstrapper"
 DEPS="bc git python-is-python3 source-highlight"
 
@@ -27,7 +27,7 @@ fi
 mkdir $TMP_DIR
 cd $TMP_DIR
 wget -qO- $ARCHIVE_URL |tar zx
-cd ubuntu-env-master
+cd ubuntu-env-main
 
 # include Anthony Scopatz's excellent collection of nano highlight files
 #  (sourced from: https://github.com/scopatz/nanorc)
