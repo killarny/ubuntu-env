@@ -2,7 +2,7 @@
 
 ARCHIVE_URL="https://github.com/killarny/ubuntu-env/archive/master.tar.gz"
 TMP_DIR="/tmp/killarny-ubuntu-env-bootstrapper"
-DEPS="bc git python source-highlight"
+DEPS="bc git python-is-python3 source-highlight"
 
 echo
 echo Bootstrapping home environment.
