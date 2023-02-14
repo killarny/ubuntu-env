@@ -7,5 +7,5 @@ This is just a set of handy configs for various things under Ubuntu, meant to ge
 ## Bootstrap new (or update existing) installation
 
 ```bash
-bash <(wget -qO- https://raw.githubusercontent.com/killarny/ubuntu-env/master/bootstrap.sh)
+bash <(wget -qO- https://raw.githubusercontent.com/killarny/ubuntu-env/main/bootstrap.sh)
 ```
